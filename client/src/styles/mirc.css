@@ -1,0 +1,677 @@
+/* mIRC Simulator Core Styles */
+
+@import './windows.css';
+@import './colors.css';
+
+/* ── Global Reset ── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+  background: #008080;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* ── Main mIRC Application Frame ── */
+.mirc-app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid;
+  border-color: #dfdfdf #808080 #808080 #dfdfdf;
+  background: #c0c0c0;
+}
+
+/* ── Title Bar (main window) ── */
+.mirc-titlebar {
+  display: flex;
+  align-items: center;
+  height: 20px;
+  background: linear-gradient(90deg, #000080, #1084d0);
+  padding: 0 3px;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.mirc-titlebar-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 4px;
+  /* Yellow lightning bolt placeholder */
+  background: #ffff00;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  margin-left: 3px;
+}
+
+.mirc-titlebar-text {
+  flex: 1;
+  color: white;
+  font-weight: bold;
+  font-size: 11px;
+  margin-left: 3px;
+}
+
+.mirc-titlebar-buttons {
+  display: flex;
+  gap: 2px;
+}
+
+/* ── Menu Bar ── */
+.mirc-menubar {
+  display: flex;
+  align-items: center;
+  height: 20px;
+  background: #c0c0c0;
+  border-bottom: 1px solid #808080;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.mirc-menu-item {
+  padding: 2px 8px;
+  font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+.mirc-menu-item:hover {
+  background: #000080;
+  color: white;
+}
+
+.mirc-menu-item.open {
+  background: #000080;
+  color: white;
+}
+
+.mirc-menu-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #dfdfdf #808080 #808080 #dfdfdf;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  min-width: 180px;
+  z-index: 9999;
+  padding: 2px 0;
+}
+
+.mirc-menu-dropdown-item {
+  padding: 3px 24px 3px 8px;
+  font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.mirc-menu-dropdown-item:hover {
+  background: #000080;
+  color: white;
+}
+
+.mirc-menu-separator {
+  height: 1px;
+  background: #808080;
+  margin: 2px 4px;
+}
+
+.mirc-menu-dropdown-item.disabled {
+  color: #808080;
+  pointer-events: none;
+}
+
+.mirc-submenu-parent {
+  position: relative;
+}
+
+.mirc-submenu-parent > .mirc-submenu {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: -2px;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #dfdfdf #808080 #808080 #dfdfdf;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  min-width: 140px;
+  z-index: 10000;
+  padding: 2px 0;
+}
+
+.mirc-submenu-parent:hover > .mirc-submenu {
+  display: block;
+}
+
+/* ── Toolbar ── */
+.mirc-toolbar {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  background: #c0c0c0;
+  border-bottom: 1px solid #808080;
+  padding: 0 4px;
+  gap: 1px;
+  flex-shrink: 0;
+}
+
+.mirc-toolbar-btn {
+  width: 24px;
+  height: 22px;
+  border: 1px solid transparent;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0;
+}
+
+.mirc-toolbar-btn:hover {
+  border-color: #dfdfdf #808080 #808080 #dfdfdf;
+}
+
+.mirc-toolbar-btn:active {
+  border-color: #808080 #dfdfdf #dfdfdf #808080;
+}
+
+.mirc-toolbar-separator {
+  width: 2px;
+  height: 20px;
+  border-left: 1px solid #808080;
+  border-right: 1px solid #dfdfdf;
+  margin: 0 2px;
+}
+
+/* ── Switchbar ── */
+.mirc-switchbar {
+  display: flex;
+  align-items: center;
+  min-height: 24px;
+  background: #c0c0c0;
+  border-bottom: 1px solid #808080;
+  padding: 2px 4px;
+  gap: 2px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.mirc-switchbar-btn {
+  height: 20px;
+  padding: 0 8px;
+  border: 1px solid;
+  border-color: #dfdfdf #808080 #808080 #dfdfdf;
+  background: #c0c0c0;
+  font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.mirc-switchbar-btn:active,
+.mirc-switchbar-btn.active {
+  border-color: #808080 #dfdfdf #dfdfdf #808080;
+  background: #b0b0b0;
+}
+
+.mirc-switchbar-btn.highlight {
+  color: #ff0000;
+}
+
+.mirc-switchbar-btn.unread {
+  color: #ff0000;
+}
+
+.mirc-switchbar-icon {
+  font-size: 10px;
+}
+
+/* ── MDI Area ── */
+.mirc-mdi-area {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: #808080;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0,0,0,0.04) 1px, rgba(0,0,0,0.04) 2px),
+    repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(0,0,0,0.04) 1px, rgba(0,0,0,0.04) 2px);
+  border: 2px solid;
+  border-color: #808080 #dfdfdf #dfdfdf #808080;
+  margin: 0;
+}
+
+/* ── MDI Child Window ── */
+.mdi-child {
+  overflow: hidden;
+  user-select: none;
+}
+
+.mdi-window-body {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  user-select: text;
+}
+
+.mdi-window-minimized {
+  border: 2px solid;
+  border-color: #dfdfdf #808080 #808080 #dfdfdf;
+  background: #c0c0c0;
+  display: flex;
+  flex-direction: column;
+}
+
+.mdi-window-minimized .window-titlebar {
+  background: linear-gradient(90deg, #808080, #b0b0b0);
+}
+
+.mdi-window-minimized.active .window-titlebar {
+  background: linear-gradient(90deg, #000080, #1084d0);
+}
+
+/* ── Status Bar ── */
+.mirc-statusbar {
+  display: flex;
+  align-items: center;
+  height: 20px;
+  background: #c0c0c0;
+  border-top: 1px solid #dfdfdf;
+  padding: 0 4px;
+  flex-shrink: 0;
+}
+
+.mirc-statusbar-text {
+  font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+  color: #000;
+  border: 1px solid;
+  border-color: #808080 #dfdfdf #dfdfdf #808080;
+  padding: 0 4px;
+  height: 16px;
+  line-height: 16px;
+  flex: 1;
+}
+
+/* ── Chat Area ── */
+.chat-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  overflow: hidden;
+}
+
+.chat-content-area {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 2px 4px;
+  font-family: 'Fixedsys', 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.3;
+  background: white;
+  color: #000;
+  border: none;
+}
+
+.chat-messages::-webkit-scrollbar {
+  width: 16px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: #c0c0c0;
+  border: 1px solid #808080;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #dfdfdf #808080 #808080 #dfdfdf;
+}
+
+/* ── Message Line ── */
+.message-line {
+  word-wrap: break-word;
+  padding: 0;
+  margin: 0;
+}
+
+.message-line.system {
+  color: #009300;
+}
+
+.message-line.action {
+  color: #9c009c;
+}
+
+.message-line.notice {
+  color: #7f0000;
+}
+
+.message-line.error {
+  color: #ff0000;
+}
+
+.message-line .timestamp {
+  color: #808080;
+}
+
+.message-line .nick {
+  font-weight: bold;
+}
+
+/* Nick colors for readability */
+.nick-color-0 { color: #cd00cd; }
+.nick-color-1 { color: #0000ee; }
+.nick-color-2 { color: #00007f; }
+.nick-color-3 { color: #009300; }
+.nick-color-4 { color: #ff0000; }
+.nick-color-5 { color: #9c009c; }
+.nick-color-6 { color: #fc7f00; }
+.nick-color-7 { color: #009393; }
+.nick-color-8 { color: #0000fc; }
+.nick-color-9 { color: #7f0000; }
+
+/* ── Nick List ── */
+.nick-list {
+  width: 120px;
+  min-width: 100px;
+  background: white;
+  border-left: 2px solid;
+  border-left-color: #808080;
+  overflow-y: auto;
+  font-family: 'Fixedsys', 'Courier New', monospace;
+  font-size: 13px;
+  padding: 2px;
+  flex-shrink: 0;
+}
+
+.nick-list::-webkit-scrollbar {
+  width: 16px;
+}
+
+.nick-list::-webkit-scrollbar-track {
+  background: #c0c0c0;
+}
+
+.nick-list::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #dfdfdf #808080 #808080 #dfdfdf;
+}
+
+.nick-list-item {
+  padding: 0 2px;
+  cursor: default;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nick-list-item:hover {
+  background: #000080;
+  color: white;
+}
+
+.nick-list-item .nick-prefix {
+  color: #009300;
+}
+
+/* ── Input Box ── */
+.chat-input-container {
+  display: flex;
+  align-items: center;
+  border-top: 2px solid;
+  border-top-color: #808080;
+  background: #c0c0c0;
+  padding: 0;
+}
+
+.chat-input {
+  flex: 1;
+  height: 22px;
+  border: 2px solid;
+  border-color: #808080 #dfdfdf #dfdfdf #808080;
+  background: white;
+  padding: 0 4px;
+  font-family: 'Fixedsys', 'Courier New', monospace;
+  font-size: 13px;
+  outline: none;
+}
+
+/* ── Connect Dialog ── */
+.connect-dialog {
+  width: 450px;
+  padding: 0;
+}
+
+.connect-dialog-body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.connect-dialog-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.connect-dialog-row label {
+  min-width: 100px;
+  font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+}
+
+.connect-dialog-row input,
+.connect-dialog-row select {
+  flex: 1;
+}
+
+.connect-dialog-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 8px 12px;
+  border-top: 1px solid #808080;
+}
+
+/* ── Channel Window MDI child ── */
+.channel-window {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.channel-window .window-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Server Window ── */
+.server-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2px 4px;
+  font-family: 'Fixedsys', 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.3;
+  background: white;
+  color: #000;
+}
+
+/* ── Connecting Animation ── */
+.connecting-dots::after {
+  content: '';
+  animation: dots 1.5s steps(3, end) infinite;
+}
+
+@keyframes dots {
+  0% { content: ''; }
+  33% { content: '.'; }
+  66% { content: '..'; }
+  100% { content: '...'; }
+}
+
+/* ── Link styling ── */
+.chat-link {
+  color: #0000ff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.chat-link:hover {
+  color: #ff0000;
+}
+
+/* ── About Dialog ── */
+.about-dialog {
+  width: 350px;
+  text-align: center;
+}
+
+.about-dialog-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.about-logo {
+  font-size: 48px;
+  color: #ffff00;
+  text-shadow: 2px 2px 0 #808080;
+}
+
+/* ── Options dialog ── */
+.options-dialog {
+  width: 500px;
+  height: 400px;
+}
+
+.options-dialog-body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.options-sidebar {
+  width: 140px;
+  border-right: 2px solid;
+  border-right-color: #808080;
+  overflow-y: auto;
+  background: white;
+}
+
+.options-content {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+}
+
+/* ── Channel list dialog ── */
+.channel-list-dialog {
+  width: 500px;
+  height: 400px;
+}
+
+.channel-list-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  overflow: hidden;
+}
+
+.channel-list-header {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  align-items: center;
+}
+
+.channel-list-table {
+  flex: 1;
+  overflow-y: auto;
+  border: 2px solid;
+  border-color: #808080 #dfdfdf #dfdfdf #808080;
+  background: white;
+  font-family: 'Fixedsys', 'Courier New', monospace;
+  font-size: 12px;
+}
+
+.channel-list-row {
+  display: flex;
+  padding: 1px 4px;
+  cursor: pointer;
+}
+
+.channel-list-row:hover {
+  background: #000080;
+  color: white;
+}
+
+.channel-list-row .col-name {
+  width: 150px;
+  flex-shrink: 0;
+}
+
+.channel-list-row .col-users {
+  width: 60px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.channel-list-row .col-topic {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Mobile Responsive Overrides ── */
+@media (max-width: 768px) {
+  /* Toolbar auto height for wrapping if needed */
+  .mirc-toolbar {
+    height: auto;
+    min-height: 28px;
+    flex-wrap: wrap;
+    padding: 2px 4px;
+  }
+  
+  /* Make nick list narrower on very small screens, or hide if it gets too cramped */
+  .nick-list {
+    width: 80px;
+    min-width: 60px;
+  }
+}
+

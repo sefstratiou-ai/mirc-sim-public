@@ -1,0 +1,293 @@
+/* Windows 98/XP Window Chrome Styles */
+
+* {
+  box-sizing: border-box;
+}
+
+/* ── Window Frame ── */
+.window-frame {
+  position: absolute;
+  border: 2px solid;
+  border-color: #dfdfdf #808080 #808080 #dfdfdf;
+  background: #c0c0c0;
+  box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #404040;
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  min-height: 120px;
+}
+
+.window-frame.active .window-titlebar {
+  background: linear-gradient(90deg, #000080, #1084d0);
+}
+
+.window-frame:not(.active) .window-titlebar {
+  background: linear-gradient(90deg, #808080, #b0b0b0);
+}
+
+/* ── Title Bar ── */
+.window-titlebar {
+  display: flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 3px;
+  cursor: default;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.window-titlebar-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 3px;
+  image-rendering: pixelated;
+}
+
+.window-titlebar-text {
+  flex: 1;
+  color: white;
+  font-size: 11px;
+  font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.window-titlebar-buttons {
+  display: flex;
+  gap: 2px;
+}
+
+.window-titlebar-btn {
+  width: 16px;
+  height: 14px;
+  border: 1px solid;
+  border-color: #dfdfdf #808080 #808080 #dfdfdf;
+  background: #c0c0c0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 8px;
+  font-family: 'Marlett', sans-serif;
+  padding: 0;
+  line-height: 1;
+}
+
+.window-titlebar-btn:active {
+  border-color: #808080 #dfdfdf #dfdfdf #808080;
+}
+
+.window-titlebar-btn.close {
+  margin-left: 2px;
+}
+
+/* ── Resize Handle ── */
+.window-resize-handle {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 12px;
+  height: 12px;
+  cursor: nwse-resize;
+}
+
+/* ── Dialog / Modal ── */
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.dialog-frame {
+  border: 2px solid;
+  border-color: #dfdfdf #808080 #808080 #dfdfdf;
+  background: #c0c0c0;
+  box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #404040, 4px 4px 10px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Buttons (Win98 style) ── */
+.win-button {
+  height: 23px;
+  min-width: 75px;
+  padding: 0 12px;
+  border: 2px solid;
+  border-color: #dfdfdf #808080 #808080 #dfdfdf;
+  background: #c0c0c0;
+  font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  outline: none;
+}
+
+.win-button:active {
+  border-color: #808080 #dfdfdf #dfdfdf #808080;
+  padding: 1px 11px 0 13px;
+}
+
+.win-button:focus {
+  outline: 1px dotted #000;
+  outline-offset: -4px;
+}
+
+.win-button.primary {
+  position: relative;
+  border: 3px solid #000;
+  border-color: #000;
+  padding: 0 10px;
+}
+
+.win-button.primary::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border: 1px dotted #000;
+  pointer-events: none;
+}
+
+/* ── Inputs (Win98 style) ── */
+.win-input {
+  height: 21px;
+  border: 2px solid;
+  border-color: #808080 #dfdfdf #dfdfdf #808080;
+  background: white;
+  padding: 0 4px;
+  font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+  outline: none;
+}
+
+.win-input:focus {
+  outline: none;
+}
+
+/* ── Listbox (Win98 style) ── */
+.win-listbox {
+  border: 2px solid;
+  border-color: #808080 #dfdfdf #dfdfdf #808080;
+  background: white;
+  overflow-y: auto;
+  font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+}
+
+.win-listbox-item {
+  padding: 1px 4px;
+  cursor: pointer;
+}
+
+.win-listbox-item:hover {
+  background: #000080;
+  color: white;
+}
+
+.win-listbox-item.selected {
+  background: #000080;
+  color: white;
+}
+
+/* ── Select / Dropdown ── */
+.win-select {
+  height: 21px;
+  border: 2px solid;
+  border-color: #808080 #dfdfdf #dfdfdf #808080;
+  background: white;
+  font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+  padding: 0 4px;
+}
+
+/* ── Tabs ── */
+.win-tabs {
+  display: flex;
+  border-bottom: 1px solid #808080;
+}
+
+.win-tab {
+  padding: 4px 12px;
+  border: 1px solid;
+  border-color: #dfdfdf #808080 #c0c0c0 #dfdfdf;
+  background: #c0c0c0;
+  font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  margin-bottom: -1px;
+}
+
+.win-tab.active {
+  background: #c0c0c0;
+  border-bottom-color: #c0c0c0;
+  padding-top: 2px;
+  padding-bottom: 6px;
+  margin-top: -2px;
+}
+
+/* ── Group Box ── */
+.win-groupbox {
+  border: 1px solid #808080;
+  padding: 12px 8px 8px;
+  margin: 4px 0;
+  position: relative;
+}
+
+.win-groupbox-label {
+  position: absolute;
+  top: -8px;
+  left: 8px;
+  background: #c0c0c0;
+  padding: 0 4px;
+  font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+}
+
+/* ── Checkbox / Radio ── */
+.win-checkbox, .win-radio {
+  font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+/* ── Mobile Responsive Overrides ── */
+@media (max-width: 768px) {
+  /* Make all MDI child windows fill the entire screen on mobile */
+  .window-frame.mdi-child {
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-width: 0 !important;
+  }
+
+  /* Make dialogs take full viewport */
+  .dialog-frame {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    border-width: 0 !important;
+  }
+
+  /* Adjust dialog overlay padding to 0 so the dialog touches screen edges */
+  .dialog-overlay {
+    padding: 0;
+  }
+
+  /* Hide resize handles on mobile since windows are full screen */
+  .window-resize-handle {
+    display: none !important;
+  }
+}
+

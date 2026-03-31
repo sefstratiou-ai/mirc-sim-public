@@ -1,0 +1,42 @@
+/* mIRC Color Code Styles */
+/* Standard mIRC 16-color palette */
+
+.mirc-color-0  { color: #ffffff; } /* White */
+.mirc-color-1  { color: #000000; } /* Black */
+.mirc-color-2  { color: #00007f; } /* Navy Blue */
+.mirc-color-3  { color: #009300; } /* Green */
+.mirc-color-4  { color: #ff0000; } /* Red */
+.mirc-color-5  { color: #7f0000; } /* Brown */
+.mirc-color-6  { color: #9c009c; } /* Purple */
+.mirc-color-7  { color: #fc7f00; } /* Orange */
+.mirc-color-8  { color: #ffff00; } /* Yellow */
+.mirc-color-9  { color: #00fc00; } /* Light Green */
+.mirc-color-10 { color: #009393; } /* Teal */
+.mirc-color-11 { color: #00ffff; } /* Cyan */
+.mirc-color-12 { color: #0000fc; } /* Royal Blue */
+.mirc-color-13 { color: #ff00ff; } /* Pink */
+.mirc-color-14 { color: #7f7f7f; } /* Grey */
+.mirc-color-15 { color: #d2d2d2; } /* Light Grey */
+
+.mirc-bg-0  { background-color: #ffffff; }
+.mirc-bg-1  { background-color: #000000; }
+.mirc-bg-2  { background-color: #00007f; }
+.mirc-bg-3  { background-color: #009300; }
+.mirc-bg-4  { background-color: #ff0000; }
+.mirc-bg-5  { background-color: #7f0000; }
+.mirc-bg-6  { background-color: #9c009c; }
+.mirc-bg-7  { background-color: #fc7f00; }
+.mirc-bg-8  { background-color: #ffff00; }
+.mirc-bg-9  { background-color: #00fc00; }
+.mirc-bg-10 { background-color: #009393; }
+.mirc-bg-11 { background-color: #00ffff; }
+.mirc-bg-12 { background-color: #0000fc; }
+.mirc-bg-13 { background-color: #ff00ff; }
+.mirc-bg-14 { background-color: #7f7f7f; }
+.mirc-bg-15 { background-color: #d2d2d2; }
+
+.mirc-bold { font-weight: bold; }
+.mirc-underline { text-decoration: underline; }
+.mirc-italic { font-style: italic; }
+.mirc-reverse { /* applied inline via JS */ }
+.mirc-strikethrough { text-decoration: line-through; }

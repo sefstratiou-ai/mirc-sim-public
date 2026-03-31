@@ -1,0 +1,17 @@
+[build]
+builder = "nixpacks"
+buildCommand = "npm run build"
+
+[deploy]
+startCommand = "npm start"
+healthcheckPath = "/api/health"
+healthcheckTimeout = 30
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3
+
+# Required environment variables:
+#   ADMIN_STATS_KEY     — secret key for /admin/stats and /api/stats
+#   STATS_DB_PATH       — set to /data/stats.db
+#
+# Required volume (configure in Railway dashboard):
+#   Mount path: /data

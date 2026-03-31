@@ -1,0 +1,13 @@
+# Ignore local node_modules — Docker will install fresh ones
+node_modules
+client/node_modules
+server/node_modules
+
+# Ignore build output (will be produced during Docker build)
+client/dist
+server/dist
+
+# Misc
+.git
+.gitignore
+*.md
