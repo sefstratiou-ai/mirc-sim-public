@@ -239,23 +239,68 @@ async function callOpenAI(
   temperature?: number,
   reasoningEffort?: string
 ): Promise<{ text: string; inputTokens: number; outputTokens: number }> {
+  const normalizedTemperature = typeof temperature === 'number' && Number.isFinite(temperature)
+    ? temperature
+    : undefined;
+
   const body: Record<string, unknown> = {
     model,
     messages,
     max_completion_tokens: maxTokens || 150,
   };
 
-  const normalizedTemperature = typeof temperature === 'number' && Number.isFinite(temperature)
-    ? temperature
-    : undefined;
-
-  // Reasoning models don't support temperature; only add it when not using reasoning
   if (reasoningEffort) {
     body.reasoning_effort = reasoningEffort;
-  } else if (normalizedTemperature !== undefined && Math.abs(normalizedTemperature - 1) > 0.0001) {
+  } else if (
+    normalizedTemperature !== undefined
+    && Math.abs(normalizedTemperature - 1) > 0.0001
+    && openAIModelSupportsCustomTemperature(model)
+  ) {
     body.temperature = normalizedTemperature;
   }
-  const response = await fetch('https://api.openai.com/v1/chat/completions', {
+
+  let response = await sendOpenAIRequest(apiKey, body);
+
+  if (!response.ok) {
+    const errorBody = await response.text();
+    if (canRetryOpenAIRequestWithoutTemperature(response.status, errorBody, body)) {
+      delete body.temperature;
+      response = await sendOpenAIRequest(apiKey, body);
+      if (!response.ok) {
+        const retryErrorBody = await response.text();
+        throw new Error(`OpenAI API error ${response.status}: ${retryErrorBody}`);
+      }
+    } else {
+      throw new Error(`OpenAI API error ${response.status}: ${errorBody}`);
+    }
+  }
+
+  const data: any = await response.json();
+  const text = data.choices?.[0]?.message?.content || '';
+  const inputTokens: number = data.usage?.prompt_tokens ?? 0;
+  const outputTokens: number = data.usage?.completion_tokens ?? 0;
+  return { text, inputTokens, outputTokens };
+}
+
+function openAIModelSupportsCustomTemperature(model: string): boolean {
+  const normalizedModel = model.trim().toLowerCase();
+  if (!normalizedModel) return true;
+  return !/^gpt-5(?:[.-]|$)/.test(normalizedModel);
+}
+
+function canRetryOpenAIRequestWithoutTemperature(
+  status: number,
+  errorBody: string,
+  requestBody: Record<string, unknown>
+): boolean {
+  if (status !== 400 || requestBody.temperature === undefined) return false;
+  return /"param"\s*:\s*"temperature"/i.test(errorBody)
+    || /does not support .*temperature/i.test(errorBody)
+    || /"code"\s*:\s*"unsupported_value"/i.test(errorBody);
+}
+
+function sendOpenAIRequest(apiKey: string, body: Record<string, unknown>): Promise<globalThis.Response> {
+  return fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -264,17 +309,6 @@ async function callOpenAI(
     body: JSON.stringify(body),
     signal: AbortSignal.timeout(120_000),
   });
-
-  if (!response.ok) {
-    const errorBody = await response.text();
-    throw new Error(`OpenAI API error ${response.status}: ${errorBody}`);
-  }
-
-  const data: any = await response.json();
-  const text = data.choices?.[0]?.message?.content || '';
-  const inputTokens: number = data.usage?.prompt_tokens ?? 0;
-  const outputTokens: number = data.usage?.completion_tokens ?? 0;
-  return { text, inputTokens, outputTokens };
 }
 
 async function callDeepSeek(
